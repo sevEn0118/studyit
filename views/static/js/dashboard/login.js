@@ -1,7 +1,7 @@
 /**
  * Created by sevEn on 2017/10/12.
  */
-define(['jquery',"cookie"],function ($) {
+define(['jquery',"cookie","form"],function ($) {
   
     //设置登录按钮，由于form表单submit事件可以提交数据，并且通过enter可以提交数据
     $("form").submit(function () {
@@ -16,12 +16,11 @@ define(['jquery',"cookie"],function ($) {
       }
 
 //        表单序列化，获取用户输入的表单信息
-      var data = $(this).serialize();
+//       var data = $(this).serialize();
 //        发送ajax请求
-      $.ajax({
+      $(this).ajaxSubmit({
         url:"/api/login",
         type:"post",
-        data:data,
         success:function (data) {
           console.log(data);
           if(data.code == 200){
