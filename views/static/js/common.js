@@ -38,6 +38,24 @@ define(["jquery","template","cookie"],function ($,template) {
 		
 	})
 	
+	
+	//点击菜单项，显示子菜单
+	// 找出子菜单，给parent注册点击事件
+	$(".navs>ul>li>ul").parent().click(function () {
+	    $(this).children("ul").stop().slideToggle();
+	})
+	
+	//点击子菜单的时候，给li的a添加active类
+	//思路：根据url与a标签的href比较，如果相同，设置a的class,
+	// 当点击分类信息时，显示子菜单，当子菜单被选择时，判断ul是否有同级的a
+	var activeA = $(".navs a[href='"+ location.pathname +"']");
+  activeA.addClass("active");
+  
+  if(activeA.parent().parent().siblings("a").length >0){
+    activeA.parent().parent().show();
+	}
+ 
+	
   
 })
 
