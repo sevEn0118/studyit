@@ -8,9 +8,15 @@ require.config({
   paths:{
     "jquery":"jquery/jquery",
     "cookie":"jquery-cookie/jquery.cookie",
-    "template":"artTemplate/template",
+    "template":"artTemplate/template-web",
     "form":"jquery-form/jquery.form",
-    "echarts":"echarts/echarts.min"
+    "echarts":"echarts/echarts.min",
+    "bootstrap":"bootstrap/js/bootstrap"
+  },
+  shim:{
+    "bootstrap":{
+      deps:["jquery"]
+    }
   }
 })
 
