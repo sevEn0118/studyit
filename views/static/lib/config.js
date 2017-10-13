@@ -9,7 +9,8 @@ require.config({
     "jquery":"jquery/jquery",
     "cookie":"jquery-cookie/jquery.cookie",
     "template":"artTemplate/template",
-    "form":"jquery-form/jquery.form"
+    "form":"jquery-form/jquery.form",
+    "echarts":"echarts/echarts.min"
   }
 })
 
