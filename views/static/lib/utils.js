@@ -4,7 +4,11 @@
 define(function () {
   return {
     getUrlObj:function () {
-      var kvp = location.search.split("?")[1].split("&");
+      var kvpp = location.search.split("?")[1];//如果没有？则为undefind
+      if(!kvpp){
+        return false;
+      }
+      var kvp = kvpp.split("&");
       // var kvp = location.search.slice(1).split("&");
       var obj={};
       for (var i = 0; i < kvp.length; i++) {
@@ -18,5 +22,4 @@ define(function () {
     }
   }
   
-
 })
