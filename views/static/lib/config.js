@@ -11,7 +11,8 @@ require.config({
     "template":"artTemplate/template-web",
     "form":"jquery-form/jquery.form",
     "echarts":"echarts/echarts.min",
-    "bootstrap":"bootstrap/js/bootstrap"
+    "bootstrap":"bootstrap/js/bootstrap",
+    "utils":"../static/lib/utils"
   },
   shim:{
     "bootstrap":{

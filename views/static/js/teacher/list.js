@@ -44,7 +44,7 @@ define(["jquery","template","bootstrap"],function ($,template) {
       },
       success:function (data) {
         if(data.code ==200){
-          console.log(data);
+          // console.log(data);
           //设置模态框的模版
           $("#teacher-info").html(template("teacher-info-tpl",data.result));
           //点击查看按钮，模态框显示
