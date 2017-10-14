@@ -1,7 +1,7 @@
 /**
  * Created by sevEn on 2017/10/14.
  */
-define(["utils","jquery","template","form"],function (utils,$,template) {
+define(["utils","jquery","template","form","datepicker","datepickerCN"],function (utils,$,template) {
     //设置讲师管理，添加与编辑讲师
     // 由于添加与编辑在同一个页面显示，
   // 不同点：
@@ -67,7 +67,16 @@ define(["utils","jquery","template","form"],function (utils,$,template) {
   //自己定义data数据，使用模版，渲染到页面上
   function renderData() {
     $(".body.teacher").html(template("mange-tpl",data));
+    // 模版创建好之后，设置日期的插件
+    $("input[name='tc_join_date']").datepicker({
+      format:"yyyy-mm-dd",
+      language:"zh-CN",
+      autoclose: true
+    
+    })
   }
+  
+  
   
   
   //编辑功能，点击保存按钮，保存修改的信息，发送ajax，需要发送tc_id
