@@ -4,7 +4,8 @@
 define(function () {
   return {
     getUrlObj:function () {
-      var kvpp = location.search.split("?")[1];//如果没有？则为undefind
+      var kvpp = location.search.split("?")[1];
+      //如果没有？则为undefind
       if(!kvpp){
         return false;
       }
