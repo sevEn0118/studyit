@@ -1,7 +1,7 @@
 /**
  * Created by sevEn on 2017/10/14.
  */
-define(["utils","jquery","template","form","datepicker","datepickerCN"],function (utils,$,template) {
+define(["utils","jquery","template","form","datepicker","datepickerCN","validate"],function (utils,$,template) {
     //设置讲师管理，添加与编辑讲师
     // 由于添加与编辑在同一个页面显示，
   // 不同点：
@@ -58,7 +58,9 @@ define(["utils","jquery","template","form","datepicker","datepickerCN"],function
     data.title ="讲师添加";
     data.button ="添 加";
     data.url ="/api/teacher/add";
-    data.result = {};
+    data.result = {
+      tc_gender : "0"
+    };
     renderData();
     
     
@@ -74,9 +76,58 @@ define(["utils","jquery","template","form","datepicker","datepickerCN"],function
       autoclose: true
     
     })
+    
+    //使用validate对表单进行验证
+    $("form").validate({
+      conditional:{
+        isweb:function (value) {
+            return value != "前端学院";
+        }
+      },
+      description:{
+        name:{
+          required:"用户名不能为空",
+          conditional:"不能为前端学院"
+          
+        },
+        pass:{
+          required:"密码不能为空",
+          pattern:"6-15位的字母或数字"
+          
+        },
+        joindate:{
+           required:"不能为空"
+        }
+      },
+      
+      //表单验证是否提交表单
+      sendForm:false,
+      onBlur:true,
+      onChange:true,
+      valid:function () {
+          //表单全部通过验证后，调用此函数，
+        // 可以再发送ajax请求，this指向form的jquery对象
+        this.ajaxSubmit({
+          success:function (data) {
+            if(data.code ==200){
+              console.log(data);
+              location.href = "/teacher/list"
+            }
+          }
+        })
+      },
+      eachValidField:function () {
+          //当表单通过验证时，表单变为绿色，加上类样式，has-success
+        // this指向这个input,给form添加样式
+        this.parent().addClass("has-success").removeClass("has-error")
+      },
+      eachInvalidField:function () {
+          //不通过验证的时候
+        this.parent().addClass("has-error").removeClass("has-success")
+      }
+    });
+    
   }
-  
-  
   
   
   //编辑功能，点击保存按钮，保存修改的信息，发送ajax，需要发送tc_id
@@ -85,16 +136,18 @@ define(["utils","jquery","template","form","datepicker","datepickerCN"],function
   //填写form表单，根据form的action=url 与method="post",发送不同的ajax请求
   // form必须有name属性才可以提交
   // 由于form是模版动态创建的，需要注册事件委托,给form表单注册submit事件
-  $(".body.teacher").on("submit","form",function () {
-      $(this).ajaxSubmit({
-        success:function (data) {
-          if(data.code ==200){
-            console.log(data);
-            location.href = "/teacher/list"
-          }
-        }
-      })
-    return false;
-  })
+  //
+  //由于通过validate插件已经发送了ajax请求
+  // $(".body.teacher").on("submit","form",function () {
+  //     $(this).ajaxSubmit({
+  //       success:function (data) {
+  //         if(data.code ==200){
+  //           console.log(data);
+  //           location.href = "/teacher/list"
+  //         }
+  //       }
+  //     })
+  //   return false;
+  // })
   
 })

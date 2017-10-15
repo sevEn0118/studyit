@@ -36,23 +36,26 @@
             <div class="form-group">
                 <label for="" class="col-xs-3 control-label">姓名</label>
                 <div class="col-xs-4">
-                    <input name="tc_name" type="text" class="form-control input-sm" placeholder="讲师名称" value="{{result.tc_name}}">
+                    <input name="tc_name" type="text" class="form-control input-sm" placeholder="讲师名称" value="{{result.tc_name}}" data-conditional="isweb" data-required data-description="name" data-describedby="msgforname">
                 </div>
+                <span id="msgforname" class="col-xs-3"></span>
             </div>
             <!--密码框，如果没有id，不需要-->
             {{if !result.tc_id}}
             <div class="form-group">
                 <label for="" class="col-xs-3 control-label">密码</label>
                 <div class="col-xs-4">
-                    <input name="tc_pass" type="password" class="form-control input-sm">
+                    <input name="tc_pass" type="password" class="form-control input-sm" data-required data-pattern="^[0-9A-Za-z]{6,15}$" data-description="pass" data-describedby="msgforpass">
                 </div>
+                <span id="msgforpass" class="col-xs-3"></span>
             </div>
             {{/if}}
             <div class="form-group">
                 <label for="" class="col-xs-3 control-label">入职时间</label>
                 <div class="col-xs-4">
-                    <input name="tc_join_date" type="text" class="form-control input-sm" value="{{result.tc_join_date}}">
+                    <input name="tc_join_date" type="text" class="form-control input-sm" value="{{result.tc_join_date}}" data-required data-description="joindate" data-describedby="msgfordate">
                 </div>
+                <span id="msgfordate" class="col-xs-3"></span>
             </div>
             <div class="form-group">
                 <label for="" class="col-xs-3 control-label">类型</label>
