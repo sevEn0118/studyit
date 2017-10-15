@@ -16,7 +16,8 @@ require.config({
     "datepicker":"bootstrap-datepicker/js/bootstrap-datepicker",
     "datepickerCN":"bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min",
     "nprogress":"nprogress/nprogress",
-    "validate":"jquery-validate/jquery-validate"
+    "validate":"jquery-validate/jquery-validate",
+    "ckeditor":"ckeditor/ckeditor"
   },
   shim:{
     "bootstrap":{
@@ -27,6 +28,10 @@ require.config({
    },
     "validate":{
       deps:["jquery"]
+    },
+    "ckeditor":{
+      exports:"CKEDITOR"
+    
     }
   }
 })
