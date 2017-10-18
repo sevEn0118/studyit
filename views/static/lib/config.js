@@ -19,7 +19,8 @@ require.config({
     "validate":"jquery-validate/jquery-validate",
     "ckeditor":"ckeditor/ckeditor",
     "uploadify":"uploadify/jquery.uploadify",
-    "region":"jquery-region/jquery.region"
+    "region":"jquery-region/jquery.region",
+    "jcrop":"Jcrop/js/Jcrop"
   },
   shim:{
     "bootstrap":{
@@ -35,6 +36,9 @@ require.config({
       exports:"CKEDITOR"
     },
     "uploadify":{
+      deps:["jquery"]
+    },
+    "jcrop":{
       deps:["jquery"]
     }
   }
