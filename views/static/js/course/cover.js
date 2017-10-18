@@ -7,6 +7,7 @@ define(["jquery","template","utils","uploadify","jcrop","form"],function ($,temp
   // 2，设置选择图片按钮，使用upload插件
   // 3，裁切图片的插件
   var id = utils.getUrl("id");
+  var jcrop_api = null;
   $.ajax({
     url:"/api/course/picture",
     type:"get",
@@ -41,6 +42,13 @@ define(["jquery","template","utils","uploadify","jcrop","form"],function ($,temp
             $(".thumb>img").attr("src",data.result.path);
             //关于裁切按钮,当图片上传之后，启动按钮
             $("#crop-btn").prop("disabled",false);
+            
+            //在这里判断jcrop_api是否有内容
+            jcrop_api && jcrop_api.destroy();
+            //并且删除缩略图的创建的div
+            $(".jcrop-thumb").remove();
+            //因为重新上传了，所以更改裁切图片的按钮
+            $("#crop-btn").text("裁切图片").data("type","crop");
             
   
           }
@@ -78,7 +86,7 @@ define(["jquery","template","utils","uploadify","jcrop","form"],function ($,temp
               //1由于缩略小图对于大图是定位，jcrop-thumb的类
               //根据源码，设置缩略图添加在小图thumb中
               //因此可以在小图里添加缩略图
-              var jcrop_api = this;
+              jcrop_api = this;
               var thumb = jcrop_api.initComponent('Thumbnailer', { width: 240, height: 120,container:".thumb" });
             })
             //2。点击裁切的之后，按钮改为保存图片
@@ -103,6 +111,9 @@ define(["jquery","template","utils","uploadify","jcrop","form"],function ($,temp
                     // 跳转到第三步，课时管理
                     location.href = "/course/lessons?id="+data.result.cs_id;
                   }
+                  
+                  //??当裁切不想要，重新裁切时，新的图片上传给了img但是canvas没有加载，因为上面的会覆盖新的图片，因此，当不需要时，需要删除插件
+                // 可以使用destory，在上传图片按钮时，判断是否有jcrop_api
               }
             })
             
